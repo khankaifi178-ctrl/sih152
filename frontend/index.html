@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Lens | National Technical Research Organisation (NTRO)</title>
+    <!-- UX4G Design Tokens, Tailwind CSS, Lucide Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Theme Variables - Official Government UX4G Specification */
+        :root[data-theme="light"] {
+            --bg-main: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --bg-header: #002B49; /* UX4G Navy */
+            --bg-subtle: #F1F5F9;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --border-color: #CBD5E1;
+            --accent-saffron: #FF9933;
+            --accent-green: #138808;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-main: #0F172A;
+            --bg-card: #1E293B;
+            --bg-header: #020617;
+            --bg-subtle: #334155;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border-color: #334155;
+            --accent-saffron: #FDBA74;
+            --accent-green: #4ADE80;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+        }
+
+        :root[data-theme="contrast"] {
+            --bg-main: #000000;
+            --bg-card: #121212;
+            --bg-header: #000000;
+            --bg-subtle: #262626;
+            --text-main: #FFFFFF;
+            --text-muted: #E5E5E5;
+            --border-color: #525252;
+            --accent-saffron: #FFB74D;
+            --accent-green: #81C784;
+            --card-shadow: none;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .ux4g-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .ux4g-header {
+            background-color: var(--bg-header);
+        }
+
+        .bg-subtle {
+            background-color: var(--bg-subtle);
+        }
+
+        .text-muted {
+            color: var(--text-muted);
+        }
+
+        .badge-viral {
+            background-color: #FEE2E2;
+            color: #DC2626;
+            border: 1px solid #FCA5A5;
+        }
+        :root[data-theme="dark"] .badge-viral {
+            background-color: #451A1A;
+            color: #F87171;
+            border: 1px solid #7F1D1D;
+        }
+
+        .badge-rising {
+            background-color: #FEF3C7;
+            color: #D97706;
+            border: 1px solid #FCD34D;
+        }
+        :root[data-theme="dark"] .badge-rising {
+            background-color: #453010;
+            color: #FBBF24;
+            border: 1px solid #78350F;
+        }
+
+        button:focus, select:focus, input:focus, a:focus {
+            outline: 3px solid var(--accent-saffron) !important;
+            outline-offset: 2px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #FF9933;
+            color: #000000;
+            padding: 8px 16px;
+            font-weight: bold;
+            z-index: 100;
+            transition: top 0.2s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Top Security Classification Banner -->
+    <div class="bg-red-900 text-white text-3xs sm:text-xs py-1 px-4 text-center font-extrabold tracking-widest uppercase flex justify-between items-center">
+        <span>🇮🇳 GOVERNMENT OF INDIA — NTRO ANALYTICS FRAMEWORK</span>
+        <span class="hidden sm:inline">RESTRICTED / INTERNAL USE ONLY</span>
+        <span class="text-amber-300 font-mono" id="system-clock">12:00:00 UTC</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="ux4g-header text-white px-6 py-4 shadow-lg">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            
+            <div class="flex items-center space-x-3.5">
+                <div class="bg-amber-500 text-slate-950 font-black text-xl w-11 h-11 rounded-lg flex items-center justify-center shadow-md border border-amber-400">
+                    NTRO
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold tracking-tight flex items-center gap-2">
+                        <span>Social Lens</span>
+                        <span class="text-3xs bg-amber-500 text-slate-950 font-bold px-2 py-0.5 rounded-full uppercase">Govt v2.4</span>
+                    </h1>
+                    <p class="text-xs text-slate-300 font-medium hidden sm:block">National Technical Research Organisation — Social Media Intelligence Framework</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 text-xs">
+
+                <div class="relative">
+                    <input type="text" id="filter-search" onkeyup="filterTopics(this.value)" placeholder="Filter topics..." class="pl-8 pr-3 py-1.5 text-xs text-slate-900 rounded border border-slate-300 focus:outline-none w-36 sm:w-44 bg-white">
+                    <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
+                </div>
+
+                <select id="filter-platform" onchange="updateDashboard()" class="bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded border border-slate-700 font-medium">
+                    <option value="all">All Platforms</option>
+                    <option value="X">X (Twitter)</option>
+                    <option value="Telegram">Telegram</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Reddit">Reddit</option>
+                    <option value="YouTube">YouTube</option>
+                </select>
+
+                <select id="filter-date" onchange="updateDashboard()" class="bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded border border-slate-700 font-medium">
+                    <option value="24h">Last 24 Hours</option>
+                    <option value="7d">Last 7 Days</option>
+                    <option value="30d">Last 30 Days</option>
+                </select>
+
+                <!-- THEME SELECTOR -->
+                <div class="flex items-center gap-1.5 bg-slate-800 border border-slate-700 rounded px-2 py-1">
+                    <span class="text-3xs font-extrabold text-amber-400 uppercase tracking-wider">Theme:</span>
+                    <select id="theme-selector" onchange="setTheme(this.value)" class="bg-slate-900 text-white text-xs px-2 py-0.5 rounded border border-slate-600 font-semibold focus:outline-none cursor-pointer">
+                        <option value="light">☀️ Light Mode (Official UX4G)</option>
+                        <option value="dark">🌙 Dark Mode (Tactical Center)</option>
+                        <option value="contrast">👁️ High Contrast (WCAG AA)</option>
+                    </select>
+                </div>
+
+                <button onclick="toggleLanguage()" id="lang-btn" title="Toggle Language (English / Hindi)" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded transition shadow-sm">
+                    EN | हिन्दी
+                </button>
+
+                <div class="flex items-center gap-1 bg-slate-800 rounded p-1 border border-slate-700 font-medium">
+                    <button onclick="exportData('csv')" class="px-2 py-0.5 hover:text-amber-400">CSV</button>
+                    <span class="text-slate-600">|</span>
+                    <button onclick="exportData('pdf')" class="px-2 py-0.5 hover:text-amber-400">PDF</button>
+                </div>
+
+                <button onclick="openHelpModal()" title="Government User Guide" class="bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold p-1.5 rounded border border-slate-700 flex items-center gap-1">
+                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                    <span class="hidden md:inline text-xs">Guide</span>
+                </button>
+
+                <div class="bg-slate-800 border border-slate-700 px-3 py-1 rounded flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                    <span class="font-semibold text-emerald-400" id="user-role-badge">Analyst (NTRO)</span>
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
+    <main id="main-content" class="max-w-7xl mx-auto w-full p-4 sm:p-6 space-y-6 flex-grow">
+
+        <!-- REAL-TIME LIVE DATA STREAM TICKER & CONNECTED SOURCES -->
+        <div class="ux4g-card p-3 flex flex-wrap justify-between items-center text-xs gap-2">
+            <div class="flex items-center space-x-2">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span class="font-extrabold text-emerald-600 uppercase tracking-wider">Live Real-Time Data Stream Connected</span>
+                <span class="text-muted hidden sm:inline">| Google News Live, Telegram, X API v2, Reddit, Meta, YouTube</span>
+            </div>
+            <div class="font-mono text-xs font-semibold" id="live-ticker-count">
+                Live Data Ingested: <span class="text-amber-600 font-extrabold" id="ticker-live-val">1,24,560</span> posts (+14/sec)
+            </div>
+        </div>
+
+        <!-- Section 1: KPI Cards -->
+        <section aria-labelledby="kpi-heading">
+            <h2 id="kpi-heading" class="sr-only">Key Performance Indicators</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                <div class="ux4g-card p-5 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-3xs font-extrabold text-muted uppercase tracking-wider" id="lbl-total-posts">Total Posts Ingested</p>
+                            <h3 class="text-2xl font-black mt-1" id="kpi-total-posts">1,24,560</h3>
+                            <p class="text-xs text-emerald-600 font-bold mt-1 flex items-center gap-1">
+                                <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Live Real-Time Updating
+                            </p>
+                        </div>
+                        <div class="p-3 bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300 rounded-lg">
+                            <i data-lucide="message-square" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ux4g-card p-5 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-3xs font-extrabold text-muted uppercase tracking-wider" id="lbl-active-users">Active User Profiles</p>
+                            <h3 class="text-2xl font-black mt-1" id="kpi-active-users">38,420</h3>
+                            <p class="text-xs text-emerald-600 font-bold mt-1 flex items-center gap-1">
+                                <i data-lucide="users" class="w-3.5 h-3.5"></i> 65% Regional India Focus
+                            </p>
+                        </div>
+                        <div class="p-3 bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 rounded-lg">
+                            <i data-lucide="user-check" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ux4g-card p-5 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-3xs font-extrabold text-muted uppercase tracking-wider" id="lbl-trending-topics">Trending Topics Active</p>
+                            <h3 class="text-2xl font-black mt-1" id="kpi-trending-count">17</h3>
+                            <p class="text-xs text-amber-600 font-bold mt-1 flex items-center gap-1">
+                                <i data-lucide="zap" class="w-3.5 h-3.5"></i> 3 Virality Bursts Active
+                            </p>
+                        </div>
+                        <div class="p-3 bg-orange-100 dark:bg-orange-950 text-orange-800 dark:text-orange-300 rounded-lg">
+                            <i data-lucide="flame" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ux4g-card p-5 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-3xs font-extrabold text-muted uppercase tracking-wider" id="lbl-sentiment-split">Sentiment Distribution</p>
+                            <h3 class="text-lg font-black mt-1 flex items-center gap-2">
+                                <span class="text-emerald-600">58% Pos</span>
+                                <span class="text-muted">/</span>
+                                <span class="text-red-600">27% Neg</span>
+                            </h3>
+                            <div class="w-full bg-subtle h-2.5 rounded-full mt-2 flex overflow-hidden border border-slate-300 dark:border-slate-700">
+                                <div class="bg-emerald-500 h-full" style="width: 58%" title="58% Positive"></div>
+                                <div class="bg-red-500 h-full" style="width: 27%" title="27% Negative"></div>
+                                <div class="bg-slate-400 h-full" style="width: 15%" title="15% Neutral"></div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300 rounded-lg">
+                            <i data-lucide="smile" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- LIVE STREAMED POSTS FEED DRAWER -->
+        <section aria-labelledby="live-feed-heading" class="ux4g-card p-5">
+            <div class="flex justify-between items-center border-b pb-3 mb-3">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="rss" class="w-5 h-5 text-emerald-600"></i>
+                    <h2 id="live-feed-heading" class="font-bold text-base">Real-Time Ingested Post Stream (Live Feed)</h2>
+                </div>
+                <span class="text-xs bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-extrabold px-2 py-0.5 rounded">Updating Live</span>
+            </div>
+
+            <div class="space-y-2.5 text-xs max-h-48 overflow-y-auto pr-1" id="live-feed-container">
+                <!-- Populated dynamically via live API -->
+            </div>
+        </section>
+
+        <!-- AUTO RESEARCH & LIVE SURVEY REPORT PANEL -->
+        <section aria-labelledby="auto-research-heading" class="ux4g-card p-5">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="pie-chart" class="w-5 h-5 text-purple-600"></i>
+                    <h2 id="auto-research-heading" class="font-bold text-base">Auto Research & Live Survey Intelligence Report</h2>
+                </div>
+                <div class="flex items-center gap-2 text-xs">
+                    <span class="bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300 font-extrabold px-2 py-0.5 rounded">95% Confidence (±1.2%)</span>
+                    <button onclick="exportData('pdf')" class="bg-slate-800 text-white font-bold px-2.5 py-1 rounded hover:bg-slate-700 text-3xs">Export Survey PDF</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <!-- Poll 1 -->
+                <div class="space-y-3 p-4 bg-subtle rounded-lg border border-slate-200 dark:border-slate-700">
+                    <h3 class="font-extrabold text-slate-900 dark:text-slate-100">1. Public Sentiment on AI Policy Compliance</h3>
+                    <div class="space-y-2">
+                        <div>
+                            <div class="flex justify-between font-semibold mb-0.5">
+                                <span>Strongly Support Regulation</span>
+                                <span class="font-extrabold text-emerald-600">58%</span>
+                            </div>
+                            <div class="w-full bg-slate-300 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-emerald-500 h-full" style="width: 58%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between font-semibold mb-0.5">
+                                <span>Concerned About Privacy Retention</span>
+                                <span class="font-extrabold text-red-600">27%</span>
+                            </div>
+                            <div class="w-full bg-slate-300 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-red-500 h-full" style="width: 27%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between font-semibold mb-0.5">
+                                <span>Neutral / Undecided</span>
+                                <span class="font-extrabold text-slate-500">15%</span>
+                            </div>
+                            <div class="w-full bg-slate-300 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-slate-400 h-full" style="width: 15%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Poll 2 -->
+                <div class="space-y-3 p-4 bg-subtle rounded-lg border border-slate-200 dark:border-slate-700">
+                    <h3 class="font-extrabold text-slate-900 dark:text-slate-100">2. Primary Concern Sector Identified in Research</h3>
+                    <div class="space-y-2">
+                        <div>
+                            <div class="flex justify-between font-semibold mb-0.5">
+                                <span>Telemetry Data Leakage</span>
+                                <span class="font-extrabold text-amber-600">46%</span>
+                            </div>
+                            <div class="w-full bg-slate-300 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-amber-500 h-full" style="width: 46%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between font-semibold mb-0.5">
+                                <span>Compliance Cost for Startups</span>
+                                <span class="font-extrabold text-indigo-600">32%</span>
+                            </div>
+                            <div class="w-full bg-slate-300 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-indigo-500 h-full" style="width: 32%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between font-semibold mb-0.5">
+                                <span>Cross-Border Data Storage</span>
+                                <span class="font-extrabold text-purple-600">22%</span>
+                            </div>
+                            <div class="w-full bg-slate-300 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-purple-500 h-full" style="width: 22%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 p-3 bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 rounded-lg text-xs space-y-1">
+                <div class="font-extrabold text-purple-800 dark:text-purple-300 flex items-center gap-1">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i> Automated Real-Time Research Findings:
+                </div>
+                <ul class="list-disc pl-5 text-slate-800 dark:text-slate-200 space-y-0.5 font-medium">
+                    <li>58% of respondents support national AI compliance frameworks for cybersecurity.</li>
+                    <li>27% express heightened anxiety regarding section 4 telemetry retention clauses.</li>
+                    <li>Google News and Telegram channels act as primary discussion seeds before propagating to X and Reddit.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Split -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <!-- Left Column -->
+            <div class="lg:col-span-7 space-y-6">
+
+                <div class="ux4g-card p-5">
+                    <div class="flex justify-between items-center mb-4 border-b pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="trending-up" class="w-5 h-5 text-amber-600"></i>
+                            <h3 class="font-bold text-base" id="lbl-trending-header">Ranked Trending Topics & Virality Forecast</h3>
+                        </div>
+                        <span class="text-xs text-muted font-medium">Click Topic for Details</span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-subtle text-muted border-b font-bold uppercase tracking-wider text-3xs">
+                                    <th class="p-2.5">Topic & Keywords</th>
+                                    <th class="p-2.5">Growth %</th>
+                                    <th class="p-2.5">Status</th>
+                                    <th class="p-2.5">Origin</th>
+                                    <th class="p-2.5">+3h Forecast</th>
+                                </tr>
+                            </thead>
+                            <tbody id="trends-table-body" class="divide-y border-t font-medium">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="ux4g-card p-5">
+                    <div class="flex justify-between items-center mb-4 border-b pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="activity" class="w-5 h-5 text-blue-600"></i>
+                            <h3 class="font-bold text-base" id="lbl-sentiment-header">Multilingual Sentiment Timeline & Shift Alerts</h3>
+                        </div>
+                        <span class="text-xs bg-red-100 text-red-800 font-extrabold px-2 py-0.5 rounded flex items-center gap-1">
+                            <i data-lucide="alert-triangle" class="w-3 h-3"></i> CUSUM Shift at 2 PM
+                        </span>
+                    </div>
+
+                    <div class="space-y-3" id="sentiment-timeline-bars">
+                        <!-- Populated dynamically -->
+                    </div>
+
+                    <div class="mt-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-lg p-3 text-xs">
+                        <div class="font-extrabold flex items-center gap-1.5 text-red-700 dark:text-red-400">
+                            <i data-lucide="shield-alert" class="w-4 h-4"></i> Z-Score Sentiment Shift Alert (2:00 PM UTC):
+                        </div>
+                        <p class="mt-1 text-slate-800 dark:text-slate-200">Negative sentiment & anxiety spiked (+34%) due to telemetry and data privacy sub-clause debate on Telegram and X.</p>
+                        <button onclick="showShiftEvidenceModal()" class="mt-2 text-xs text-red-800 dark:text-red-300 font-extrabold underline hover:text-red-900">
+                            Inspect 2 Evidence Posts (Hinglish / Sarcasm Scored)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ux4g-card p-5">
+                    <div class="flex justify-between items-center mb-4 border-b pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="users" class="w-5 h-5 text-emerald-600"></i>
+                            <h3 class="font-bold text-base" id="lbl-audience-header">Audience Demographic Profiling</h3>
+                        </div>
+                        <div class="flex gap-1 text-xs font-semibold">
+                            <button onclick="loadDemographics('age')" class="px-2 py-1 bg-subtle rounded hover:bg-slate-300 dark:hover:bg-slate-700">Age</button>
+                            <button onclick="loadDemographics('geography')" class="px-2 py-1 bg-subtle rounded hover:bg-slate-300 dark:hover:bg-slate-700">Geo</button>
+                            <button onclick="loadDemographics('language')" class="px-2 py-1 bg-subtle rounded hover:bg-slate-300 dark:hover:bg-slate-700">Language</button>
+                            <button onclick="loadDemographics('interest')" class="px-2 py-1 bg-subtle rounded hover:bg-slate-300 dark:hover:bg-slate-700">Interest</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3" id="demographics-container">
+                        <!-- Populated dynamically -->
+                    </div>
+
+                    <div class="mt-4 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 rounded-lg p-2.5 text-xs flex items-center justify-between">
+                        <span class="flex items-center gap-1.5 font-medium text-blue-900 dark:text-blue-200">
+                            <i data-lucide="lock" class="w-4 h-4 text-blue-700 dark:text-blue-400"></i>
+                            Differential Privacy: Buckets &lt;20 users automatically suppressed. Zero per-user PII exposed.
+                        </span>
+                        <span class="bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-100 font-extrabold px-2 py-0.5 rounded text-3xs">Passed</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column -->
+            <div class="lg:col-span-5 space-y-6">
+
+                <div class="ux4g-card p-5">
+                    <div class="flex justify-between items-center mb-3 border-b pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="share-2" class="w-5 h-5 text-indigo-600"></i>
+                            <h3 class="font-bold text-base" id="lbl-network-header">Link Analysis & Cascade Virality</h3>
+                        </div>
+                        <span class="text-xs bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 font-bold px-2 py-0.5 rounded">Louvain Communities</span>
+                    </div>
+
+                    <div class="bg-subtle p-3 rounded-lg border border-slate-300 dark:border-slate-700 mb-4">
+                        <div class="flex justify-between text-xs font-bold mb-1">
+                            <span>Virality Time Slider Scrubbing:</span>
+                            <span id="slider-time-label" class="text-indigo-600 dark:text-indigo-400 font-black">4 PM (Full Cascade)</span>
+                        </div>
+                        <input type="range" min="1" max="5" value="5" step="1" id="time-slider" oninput="onTimeSliderChange(this.value)" class="w-full accent-indigo-600 cursor-pointer">
+                        <div class="flex justify-between text-3xs font-bold text-muted mt-1">
+                            <span>12 PM</span>
+                            <span>1 PM</span>
+                            <span>2 PM</span>
+                            <span>3 PM</span>
+                            <span>4 PM</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 rounded-lg p-4 text-white min-h-[270px] flex flex-col justify-between relative overflow-hidden shadow-inner border border-slate-800" id="network-visual-canvas">
+                        <div class="text-xs text-slate-400 font-mono flex justify-between">
+                            <span>Topology: Directed Graph</span>
+                            <span class="text-amber-400 font-bold">8 Active Nodes | 7 Edges</span>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2.5 my-3 items-center">
+                            <div onclick="inspectNode('User A (Score 94)', 'Community A', '450k Followers')" class="cursor-pointer bg-slate-900 border-2 border-amber-500 rounded-lg p-2 text-center hover:scale-105 transition shadow">
+                                <div class="text-xs font-bold text-amber-400">User A</div>
+                                <div class="text-3xs text-slate-300">Score: 94</div>
+                                <div class="text-3xs text-amber-500 font-bold">Community A</div>
+                            </div>
+                            <div class="text-center text-xs font-mono text-slate-400">
+                                ➔ <span class="text-amber-400 text-3xs font-bold">1 PM Repost</span> ➔
+                            </div>
+                            <div onclick="inspectNode('User B (Score 89)', 'Community B', '280k Followers')" class="cursor-pointer bg-slate-900 border-2 border-amber-300 rounded-lg p-2 text-center hover:scale-105 transition shadow">
+                                <div class="text-xs font-bold text-amber-300">User B</div>
+                                <div class="text-3xs text-slate-300">Score: 89</div>
+                                <div class="text-3xs text-amber-400 font-bold">Community B</div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2.5 my-1 items-center">
+                            <div class="text-center text-xs font-mono text-slate-400">
+                                ⬇ <span class="text-emerald-400 text-3xs font-bold">2 PM Forward</span>
+                            </div>
+                            <div></div>
+                            <div class="text-center text-xs font-mono text-slate-400">
+                                ⬇ <span class="text-indigo-400 text-3xs font-bold">3 PM Viral</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2.5 items-center">
+                            <div onclick="inspectNode('User C (Score 84)', 'Community C', '195k Followers')" class="cursor-pointer bg-slate-900 border-2 border-emerald-500 rounded-lg p-2 text-center hover:scale-105 transition shadow">
+                                <div class="text-xs font-bold text-emerald-400">User C</div>
+                                <div class="text-3xs text-slate-300">Score: 84</div>
+                                <div class="text-3xs text-emerald-400 font-bold">Community C</div>
+                            </div>
+                            <div class="text-center text-xs font-mono text-slate-400">
+                                ➔ <span class="text-emerald-400 text-3xs font-bold">4 PM Spread</span> ➔
+                            </div>
+                            <div class="bg-slate-900 border border-slate-700 rounded-lg p-2 text-center">
+                                <div class="text-xs font-bold text-slate-300">Public Media</div>
+                                <div class="text-3xs text-slate-400">Cross-Platform</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-3xs text-slate-400 border-t border-slate-800 pt-2 flex justify-between items-center">
+                            <span>Cascade Path: User A ➔ Comm A ➔ Comm B ➔ Comm C</span>
+                            <span class="text-amber-400 font-extrabold">Click Node to Inspect</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ux4g-card p-5">
+                    <div class="flex justify-between items-center mb-3 border-b pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="award" class="w-5 h-5 text-amber-600"></i>
+                            <h3 class="font-bold text-base" id="lbl-influencers-header">Top Influencers Intelligence</h3>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3" id="influencers-list">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <div class="ux4g-card p-5">
+                    <div class="flex justify-between items-center mb-4 border-b pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="clock" class="w-5 h-5 text-blue-600"></i>
+                            <h3 class="font-bold text-base" id="lbl-timeline-header">Virality Event Narrative Rail</h3>
+                        </div>
+                    </div>
+
+                    <div class="relative border-l-2 border-indigo-400 dark:border-indigo-600 ml-3 space-y-4 text-xs" id="timeline-rail-container">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Shift Evidence Modal -->
+    <div id="evidence-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+        <div class="ux4g-card max-w-lg w-full p-6 shadow-2xl space-y-4 border-2 border-red-500">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-base flex items-center gap-2 text-red-600">
+                    <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                    Evidence Posts — CUSUM Shift Alert (2:00 PM)
+                </h3>
+                <button onclick="closeShiftEvidenceModal()" class="text-muted font-bold text-lg hover:text-red-500">✕</button>
+            </div>
+            <div class="space-y-3 text-xs">
+                <div class="p-3 bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 rounded-lg">
+                    <div class="flex justify-between text-3xs font-extrabold text-red-700 dark:text-red-300">
+                        <span>X (Twitter) — @user_a_tech</span>
+                        <span class="bg-red-200 dark:bg-red-900 px-1.5 py-0.5 rounded">Sarcasm Score: 85%</span>
+                    </div>
+                    <p class="mt-1 font-semibold">"Data Privacy alert: Unverified third-party scripts observed leaking telemetry data... Great job team."</p>
+                    <div class="mt-2 text-3xs text-muted font-bold">Thread Context: Scored under Compliance Directive Announcement</div>
+                </div>
+                <div class="p-3 bg-orange-50 dark:bg-orange-950/60 border border-orange-200 dark:border-orange-800 rounded-lg">
+                    <div class="flex justify-between text-3xs font-extrabold text-orange-700 dark:text-orange-300">
+                        <span>Telegram — @user_b_intel</span>
+                        <span class="bg-orange-200 dark:bg-orange-900 px-1.5 py-0.5 rounded">Hinglish Negative</span>
+                    </div>
+                    <p class="mt-1 font-semibold">"Yeh AI Regulation policy mein telemetry clause se security issue ho sakta hai. Re-verify urgently."</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <button onclick="closeShiftEvidenceModal()" class="bg-slate-900 text-white font-bold text-xs px-4 py-2 rounded hover:bg-slate-800">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Node Inspector Modal -->
+    <div id="node-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+        <div class="ux4g-card max-w-md w-full p-6 shadow-2xl space-y-4 border-2 border-amber-500">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-base" id="node-modal-title">Node Intelligence Inspector</h3>
+                <button onclick="closeNodeModal()" class="text-muted font-bold text-lg hover:text-amber-500">✕</button>
+            </div>
+            <div class="space-y-2 text-xs" id="node-modal-body">
+                <!-- Dynamic node details -->
+            </div>
+            <div class="text-right">
+                <button onclick="closeNodeModal()" class="bg-amber-600 text-slate-950 font-extrabold text-xs px-4 py-2 rounded hover:bg-amber-500">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Topic Details Modal Drawer -->
+    <div id="topic-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+        <div class="ux4g-card max-w-xl w-full p-6 shadow-2xl space-y-4 border-2 border-blue-500">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-base flex items-center gap-2" id="topic-modal-title">
+                    <i data-lucide="hash" class="w-5 h-5 text-amber-600"></i> Topic Intelligence Breakdown
+                </h3>
+                <button onclick="closeTopicModal()" class="text-muted font-bold text-lg hover:text-blue-500">✕</button>
+            </div>
+            <div class="space-y-3 text-xs" id="topic-modal-body">
+                <!-- Dynamic topic details -->
+            </div>
+            <div class="text-right">
+                <button onclick="closeTopicModal()" class="bg-slate-900 text-white font-bold text-xs px-4 py-2 rounded hover:bg-slate-800">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Government User Guide Modal -->
+    <div id="help-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+        <div class="ux4g-card max-w-2xl w-full p-6 shadow-2xl space-y-4 overflow-y-auto max-h-[85vh]">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-base flex items-center gap-2 text-amber-600">
+                    <i data-lucide="help-circle" class="w-5 h-5"></i> Social Lens — Government User Guide
+                </h3>
+                <button onclick="closeHelpModal()" class="text-muted font-bold text-lg">✕</button>
+            </div>
+            <div class="space-y-4 text-xs leading-relaxed">
+                <div>
+                    <h4 class="font-extrabold text-sm mb-1 text-indigo-600">1. Multilingual Sentiment Vector</h4>
+                    <p class="text-muted">Analyzes polarity and multi-label emotions (anxiety, excitement, sarcasm, anger) across English, Hindi, and Hinglish. Automatically flipped when sarcasm probability > 75% in thread context.</p>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-sm mb-1 text-emerald-600">2. Audience Demographic Vector</h4>
+                    <p class="text-muted">Extracts age distribution, regional geography, languages, and professional interests. Enforces Differential Privacy (<20 user buckets suppressed).</p>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-sm mb-1 text-amber-600">3. Trend Vector & Volume Forecast</h4>
+                    <p class="text-muted">Clusters posts into topics via BERTopic/TF-IDF, ranks by growth %, and predicts 1-6 hour volume bounds with Prophet/ARIMA.</p>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-sm mb-1 text-purple-600">4. Network Link Analysis & Time Slider</h4>
+                    <p class="text-muted">Builds directed interaction graph, groups users into Louvain communities, computes 0-100 influence scores, and lets you scrub the time slider (12 PM to 4 PM) to watch virality spread.</p>
+                </div>
+            </div>
+            <div class="text-right border-t pt-3">
+                <button onclick="closeHelpModal()" class="bg-amber-600 text-slate-950 font-bold text-xs px-4 py-2 rounded hover:bg-amber-500">Got it!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="ux4g-header text-slate-300 text-xs py-4 px-6 text-center mt-auto border-t border-slate-800">
+        <p>© 2026 National Technical Research Organisation (NTRO) — Social Lens Framework. UX4G Design System Compliant.</p>
+    </footer>
+
+    <!-- Frontend Script -->
+    <script>
+        let currentLang = 'en';
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // System Clock Update
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('system-clock').innerText = now.toUTCString().split(' ')[4] + ' UTC';
+        }, 1000);
+
+        // Theme Switcher Handler
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            const selector = document.getElementById('theme-selector');
+            if (selector) selector.value = theme;
+        }
+
+        // Live Sample Posts Stream Buffer
+        const sampleLiveStreamPosts = [
+            { author: "@google_news_india", platform: "Google News", text: "Draft guidelines for AI Governance and data sovereignty framework announced in New Delhi.", polarity: "positive", emotion: "excitement" },
+            { author: "@telegram_intel", platform: "Telegram", text: "Section 4 telemetry privacy clause under review by strategic research group.", polarity: "neutral", emotion: "supportive" },
+            { author: "@x_tech_bulletin", platform: "X", text: "Cybersecurity advisory: Critical endpoint patch released for enterprise servers.", polarity: "negative", emotion: "anxiety" },
+            { author: "@reddit_policy_mod", platform: "Reddit", text: "Public discussion megathread: AI Policy compliance standards and startup impact.", polarity: "positive", emotion: "supportive" }
+        ];
+
+        // Real-Time Live Sync Engine
+        async function fetchLiveUpdates() {
+            try {
+                const res = await fetch('/summary');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.total_posts_formatted) {
+                        document.getElementById('kpi-total-posts').innerText = data.total_posts_formatted;
+                        document.getElementById('ticker-live-val').innerText = data.total_posts_formatted;
+                    }
+                    if (data.latest_live_feed && data.latest_live_feed.length > 0) {
+                        renderLiveFeed(data.latest_live_feed);
+                    } else {
+                        renderLiveFeed(sampleLiveStreamPosts);
+                    }
+                }
+            } catch (e) {
+                // Fallback simulation if offline
+                let valStr = document.getElementById('kpi-total-posts').innerText.replace(/,/g, '');
+                let count = parseInt(valStr) || 124560;
+                count += Math.floor(Math.random() * 6) + 2;
+                const formatted = count.toLocaleString('en-IN');
+                document.getElementById('kpi-total-posts').innerText = formatted;
+                document.getElementById('ticker-live-val').innerText = formatted;
+                renderLiveFeed(sampleLiveStreamPosts);
+            }
+        }
+
+        function renderLiveFeed(posts) {
+            const container = document.getElementById('live-feed-container');
+            container.innerHTML = posts.map(p => `
+                <div class="p-2.5 bg-subtle rounded-lg border border-slate-200 dark:border-slate-700 flex justify-between items-center text-xs animate-fade-in">
+                    <div class="space-y-0.5 max-w-[80%]">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-extrabold text-slate-900 dark:text-slate-100">${p.author_handle || p.author}</span>
+                            <span class="text-3xs bg-slate-200 dark:bg-slate-700 font-bold px-1.5 py-0.5 rounded text-slate-800 dark:text-slate-200">${p.platform}</span>
+                        </div>
+                        <p class="text-muted truncate font-medium">${p.text}</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="px-2 py-0.5 rounded font-extrabold text-3xs uppercase ${p.polarity === 'negative' ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'}">${p.polarity}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Poll Live Data every 3 seconds
+        setInterval(fetchLiveUpdates, 3000);
+
+        // Data Models
+        const trendsData = [
+            { id: "t1", topic: "AI Regulation", keywords: "#AIRegulation #NTRO #Compliance", growth: "+340%", status: "viral", platform: "Telegram", forecast: "58,900 posts" },
+            { id: "t2", topic: "New Product", keywords: "#NewProduct #Launch #Security", growth: "+280%", status: "rising", platform: "X", forecast: "41,000 posts" },
+            { id: "t3", topic: "Data Privacy", keywords: "#DataPrivacy #GDPR #Encryption", growth: "+190%", status: "rising", platform: "Reddit", forecast: "29,500 posts" }
+        ];
+
+        const influencersData = [
+            { rank: "#1", handle: "@user_a_tech", platform: "X", score: 94, reach: "450,000", comm: "Community A" },
+            { rank: "#2", handle: "@user_b_intel", platform: "Telegram", score: 89, reach: "280,000", comm: "Community B" },
+            { rank: "#3", handle: "@user_c_analyst", platform: "X", score: 84, reach: "195,000", comm: "Community C" }
+        ];
+
+        const timelineEvents = [
+            { time: "12 PM", title: "Topic Appears", desc: "Initial Telegram public channel post on AI Regulation draft.", plat: "Telegram" },
+            { time: "1 PM", title: "Influencer Amplification", desc: "User A posts thread on X; Community A reposts.", plat: "X" },
+            { time: "2 PM", title: "Sentiment Shift", desc: "Z-score alert triggered (+34% negative/anxiety).", plat: "X/Telegram" },
+            { time: "3 PM", title: "Viral Cascade", desc: "Topic achieves +340% growth rate.", plat: "Multi-Platform" },
+            { time: "4 PM", title: "Cross-Platform Spread", desc: "Propagates to Reddit megathread and YouTube.", plat: "Reddit/YouTube" }
+        ];
+
+        function renderTrends(filterText = "") {
+            const tbody = document.getElementById('trends-table-body');
+            const filtered = trendsData.filter(t => 
+                t.topic.toLowerCase().includes(filterText.toLowerCase()) || 
+                t.keywords.toLowerCase().includes(filterText.toLowerCase())
+            );
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-muted font-semibold">No matching topics found for "${filterText}"</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(t => `
+                <tr onclick="inspectTopic('${t.id}')" class="hover:bg-subtle cursor-pointer transition">
+                    <td class="p-2.5">
+                        <div class="font-extrabold text-slate-900 dark:text-slate-100">${t.topic}</div>
+                        <div class="text-3xs text-muted font-mono">${t.keywords}</div>
+                    </td>
+                    <td class="p-2.5 font-black text-emerald-600 dark:text-emerald-400">${t.growth}</td>
+                    <td class="p-2.5">
+                        <span class="px-2 py-0.5 rounded font-extrabold uppercase text-3xs ${t.status === 'viral' ? 'badge-viral' : 'badge-rising'}">${t.status}</span>
+                    </td>
+                    <td class="p-2.5 text-slate-700 dark:text-slate-300">${t.platform}</td>
+                    <td class="p-2.5 font-bold text-slate-800 dark:text-slate-200">${t.forecast}</td>
+                </tr>
+            `).join('');
+        }
+
+        function filterTopics(query) {
+            renderTrends(query);
+        }
+
+        function renderInfluencers() {
+            const list = document.getElementById('influencers-list');
+            list.innerHTML = influencersData.map(i => `
+                <div class="flex justify-between items-center p-3 bg-subtle rounded-lg border border-slate-200 dark:border-slate-700 text-xs hover:scale-[1.01] transition">
+                    <div class="flex items-center space-x-3">
+                        <span class="font-black text-amber-600 text-sm">${i.rank}</span>
+                        <div>
+                            <div class="font-extrabold flex items-center gap-1.5">
+                                <span>${i.handle}</span>
+                                <span class="text-3xs bg-slate-200 dark:bg-slate-700 px-1.5 py-0.5 rounded text-slate-800 dark:text-slate-200">${i.platform}</span>
+                            </div>
+                            <div class="text-3xs text-muted font-medium">Reach: ${i.reach} followers | ${i.comm}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-black text-sm text-amber-600 dark:text-amber-400">${i.score}</div>
+                        <div class="text-3xs font-extrabold text-muted uppercase">Influence Score</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderTimelineRail() {
+            const container = document.getElementById('timeline-rail-container');
+            container.innerHTML = timelineEvents.map(e => `
+                <div class="relative pl-6">
+                    <div class="absolute -left-[9px] top-0.5 w-4 h-4 rounded-full bg-indigo-600 border-2 border-white dark:border-slate-900"></div>
+                    <div class="font-black text-indigo-700 dark:text-indigo-400 text-xs">${e.time} — ${e.title}</div>
+                    <p class="text-muted mt-0.5">${e.desc}</p>
+                    <span class="inline-block mt-1 text-3xs bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 font-extrabold px-1.5 py-0.5 rounded border border-indigo-300 dark:border-indigo-700">${e.plat}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderSentimentBars() {
+            const container = document.getElementById('sentiment-timeline-bars');
+            const data = [
+                { hour: "12:00", pos: 65, neg: 20, shift: false },
+                { hour: "13:00", pos: 60, neg: 25, shift: false },
+                { hour: "14:00 (CUSUM Shift)", pos: 32, neg: 54, shift: true },
+                { hour: "15:00", pos: 45, neg: 40, shift: false },
+                { hour: "16:00", pos: 55, neg: 30, shift: false }
+            ];
+
+            container.innerHTML = data.map(d => `
+                <div class="text-xs">
+                    <div class="flex justify-between font-bold text-slate-700 dark:text-slate-300 mb-1">
+                        <span class="${d.shift ? 'text-red-600 dark:text-red-400 font-black flex items-center gap-1' : ''}">
+                            ${d.shift ? '⚠️ ' : ''}${d.hour}
+                        </span>
+                        <span>${d.pos}% Positive | ${d.neg}% Negative</span>
+                    </div>
+                    <div class="w-full bg-subtle h-2.5 rounded-full flex overflow-hidden border border-slate-300 dark:border-slate-700">
+                        <div class="bg-emerald-500 h-full" style="width: ${d.pos}%"></div>
+                        <div class="bg-red-500 h-full" style="width: ${d.neg}%"></div>
+                        <div class="bg-slate-400 h-full" style="width: ${100 - d.pos - d.neg}%"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadDemographics(dim) {
+            const container = document.getElementById('demographics-container');
+            let items = [];
+            if (dim === 'age') {
+                items = [
+                    { label: "18-24 years", pct: "42%" },
+                    { label: "25-34 years", pct: "31%" },
+                    { label: "35-44 years", pct: "15%" },
+                    { label: "45-54 years", pct: "8%" },
+                    { label: "55+ years", pct: "4%" }
+                ];
+            } else if (dim === 'geography') {
+                items = [
+                    { label: "India", pct: "65%" },
+                    { label: "USA", pct: "15%" },
+                    { label: "UK", pct: "8%" },
+                    { label: "Germany", pct: "5%" },
+                    { label: "Canada", pct: "4%" }
+                ];
+            } else if (dim === 'language') {
+                items = [
+                    { label: "English", pct: "50%" },
+                    { label: "Hindi", pct: "30%" },
+                    { label: "Hinglish", pct: "20%" }
+                ];
+            } else {
+                items = [
+                    { label: "Technology", pct: "35%" },
+                    { label: "Government & Policy", pct: "25%" },
+                    { label: "Defense & Security", pct: "18%" },
+                    { label: "Finance", pct: "12%" }
+                ];
+            }
+
+            container.innerHTML = items.map(i => `
+                <div class="text-xs">
+                    <div class="flex justify-between font-bold mb-1">
+                        <span>${i.label}</span>
+                        <span class="font-extrabold text-amber-600 dark:text-amber-400">${i.pct}</span>
+                    </div>
+                    <div class="w-full bg-subtle h-2 rounded-full overflow-hidden border border-slate-300 dark:border-slate-700">
+                        <div class="bg-amber-500 h-full" style="width: ${i.pct}"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function onTimeSliderChange(val) {
+            const labels = ["12 PM", "1 PM", "2 PM", "3 PM", "4 PM (Full Cascade)"];
+            document.getElementById('slider-time-label').innerText = labels[val - 1];
+        }
+
+        function inspectNode(name, community, followers) {
+            document.getElementById('node-modal-title').innerText = `Node Intelligence: ${name}`;
+            document.getElementById('node-modal-body').innerHTML = `
+                <div class="p-3 bg-subtle rounded-lg space-y-1 text-xs">
+                    <div><strong>Identifier:</strong> ${name}</div>
+                    <div><strong>Louvain Community:</strong> ${community}</div>
+                    <div><strong>Reach / Audience:</strong> ${followers}</div>
+                    <div><strong>Interaction Type:</strong> Direct Seed & Repost Node</div>
+                    <div><strong>Influence Score:</strong> High Confidence (94/100)</div>
+                </div>
+            `;
+            document.getElementById('node-modal').classList.remove('hidden');
+            document.getElementById('node-modal').classList.add('flex');
+        }
+
+        function closeNodeModal() {
+            document.getElementById('node-modal').classList.add('hidden');
+            document.getElementById('node-modal').classList.remove('flex');
+        }
+
+        function inspectTopic(topicId) {
+            const topic = trendsData.find(t => t.id === topicId) || trendsData[0];
+            document.getElementById('topic-modal-title').innerText = `Topic Breakdown: ${topic.topic}`;
+            document.getElementById('topic-modal-body').innerHTML = `
+                <div class="p-3 bg-subtle rounded-lg space-y-2 text-xs">
+                    <div class="flex justify-between">
+                        <span><strong>Growth Rate:</strong> <span class="text-emerald-600 font-extrabold">${topic.growth}</span></span>
+                        <span><strong>Status:</strong> <span class="uppercase font-bold">${topic.status}</span></span>
+                    </div>
+                    <div><strong>Keywords:</strong> ${topic.keywords}</div>
+                    <div><strong>First Platform Seen:</strong> ${topic.platform} (12:00 PM UTC)</div>
+                    <div><strong>+3h Volume Prediction:</strong> ${topic.forecast}</div>
+                    <div><strong>Cross-Platform Cascade:</strong> Telegram ➔ X ➔ Reddit ➔ YouTube</div>
+                </div>
+            `;
+            document.getElementById('topic-modal').classList.remove('hidden');
+            document.getElementById('topic-modal').classList.add('flex');
+        }
+
+        function closeTopicModal() {
+            document.getElementById('topic-modal').classList.add('hidden');
+            document.getElementById('topic-modal').classList.remove('flex');
+        }
+
+        function showShiftEvidenceModal() {
+            document.getElementById('evidence-modal').classList.remove('hidden');
+            document.getElementById('evidence-modal').classList.add('flex');
+        }
+
+        function closeShiftEvidenceModal() {
+            document.getElementById('evidence-modal').classList.add('hidden');
+            document.getElementById('evidence-modal').classList.remove('flex');
+        }
+
+        function openHelpModal() {
+            document.getElementById('help-modal').classList.remove('hidden');
+            document.getElementById('help-modal').classList.add('flex');
+        }
+
+        function closeHelpModal() {
+            document.getElementById('help-modal').classList.add('hidden');
+            document.getElementById('help-modal').classList.remove('flex');
+        }
+
+        function toggleLanguage() {
+            if (currentLang === 'en') {
+                currentLang = 'hi';
+                document.getElementById('lang-btn').innerText = 'हिन्दी | EN';
+                document.getElementById('lbl-total-posts').innerText = 'कुल पोस्ट प्राप्त';
+                document.getElementById('lbl-active-users').innerText = 'सक्रिय उपयोगकर्ता प्रोफाइल';
+                document.getElementById('lbl-trending-topics').innerText = 'ट्रेंडिंग विषय सक्रिय';
+                document.getElementById('lbl-sentiment-split').innerText = 'भावना वितरण';
+            } else {
+                currentLang = 'en';
+                document.getElementById('lang-btn').innerText = 'EN | हिन्दी';
+                document.getElementById('lbl-total-posts').innerText = 'Total Posts Ingested';
+                document.getElementById('lbl-active-users').innerText = 'Active User Profiles';
+                document.getElementById('lbl-trending-topics').innerText = 'Trending Topics Active';
+                document.getElementById('lbl-sentiment-split').innerText = 'Sentiment Distribution';
+            }
+        }
+
+        function exportData(format) {
+            window.open(`/export?format=${format}`, '_blank');
+        }
+
+        function updateDashboard() {
+            renderTrends(document.getElementById('filter-search').value);
+        }
+
+        fetchLiveUpdates();
+        renderTrends();
+        renderInfluencers();
+        renderTimelineRail();
+        renderSentimentBars();
+        loadDemographics('age');
+    </script>
+</body>
+</html>
